@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>麻將比賽公告</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Noto Sans TC', sans-serif; }
+        .mj-red { color: #D7000F; }
+        .mj-bg { background-color: #8B0000; }
+        .mj-gold { color: #FFD700; }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen flex flex-col items-center justify-center p-4">
+
+    <!-- 這是要被轉成圖片的區域 -->
+    <div id="capture-area" class="max-w-md w-full bg-white shadow-2xl overflow-hidden rounded-xl relative">
+        <!-- Header -->
+        <div class="mj-bg p-6 text-center text-white relative">
+            <div class="absolute top-2 left-2 opacity-20 text-4xl">🀄</div>
+            <div class="absolute bottom-2 right-2 opacity-20 text-4xl">🀅</div>
+            <h2 class="text-sm font-bold tracking-widest text-yellow-300 mb-1">五將輪戰｜固定座次｜全場同步</h2>
+            <h1 class="text-3xl font-black tracking-wider">比賽規章公告</h1>
+            <p class="mt-2 text-xs opacity-90">請選手務必詳閱，以維護賽事公平</p>
+        </div>
+
+        <!-- Content -->
+        <div class="p-6 space-y-6">
+
+            <!-- 基本規則 -->
+            <div class="text-center">
+                <h3 class="font-bold text-gray-800 text-lg mb-2 flex items-center justify-center">
+                    <span class="w-2 h-2 bg-red-600 rounded-full mr-2"></span>
+                    基本設定
+                    <span class="w-2 h-2 bg-red-600 rounded-full ml-2"></span>
+                </h3>
+                <div class="grid grid-cols-2 gap-3 text-sm text-gray-700 font-medium">
+                    <div class="bg-red-50 p-2 rounded">起始分：5000</div>
+                    <div class="bg-red-50 p-2 rounded">底分：200</div>
+                    <div class="bg-red-50 p-2 rounded">台數：50 / 台</div>
+                    <div class="bg-red-50 p-2 rounded">座次：固定表</div>
+                </div>
+            </div>
+
+            <!-- 時間制度 -->
+            <div class="border-l-4 border-red-700 pl-4 py-1 bg-gray-50 rounded-r">
+                <h3 class="font-bold text-red-800 mb-2">⏱ 時間制度 <span class="text-xs font-normal text-gray-500">（觸發任一條件）</span></h3>
+                <ul class="text-sm space-y-2 text-gray-700">
+                    <li>① 任一桌完成四圈 <span class="text-red-600 font-bold">→ 全場倒數 20 分鐘</span></li>
+                    <li>② 全場時間達 80 分鐘 <span class="text-red-600 font-bold">→ 全場倒數 20 分鐘</span></li>
+                </ul>
+                <div class="mt-2 text-xs text-gray-500 bg-white p-2 rounded border border-gray-200">
+                    <p>※ 倒數開始：當前該手牌必須打完</p>
+                    <p>※ 倒數結束：結算成績，不再開新局</p>
+                </div>
+            </div>
+
+            <!-- 計分方式 -->
+            <div>
+                <h3 class="font-bold text-gray-800 text-lg mb-2 text-center">🏆 名次與積分</h3>
+                <div class="flex justify-between items-center bg-gray-800 text-white rounded-lg p-3 text-center shadow-md">
+                    <div class="flex-1 border-r border-gray-600">
+                        <div class="text-xs text-gray-400">第一名</div>
+                        <div class="text-2xl font-bold text-yellow-400">4<span class="text-xs">分</span></div>
+                    </div>
+                    <div class="flex-1 border-r border-gray-600">
+                        <div class="text-xs text-gray-400">第二名</div>
+                        <div class="text-2xl font-bold">2<span class="text-xs">分</span></div>
+                    </div>
+                    <div class="flex-1 border-r border-gray-600">
+                        <div class="text-xs text-gray-400">第三名</div>
+                        <div class="text-xl font-bold">1<span class="text-xs">分</span></div>
+                    </div>
+                    <div class="flex-1">
+                        <div class="text-xs text-gray-400">第四名</div>
+                        <div class="text-xl font-bold text-gray-500">0<span class="text-xs">分</span></div>
+                    </div>
+                </div>
+                <p class="text-center text-xs text-gray-500 mt-1">同點數者，該名次積分取平均</p>
+            </div>
+
+            <!-- 決勝順序 -->
+            <div class="bg-yellow-50 p-4 rounded-lg border border-yellow-200">
+                <h3 class="font-bold text-yellow-800 mb-2 text-sm">🏅 總排名判定順序</h3>
+                <ol class="text-sm text-yellow-900 space-y-1 list-decimal list-inside font-medium">
+                    <li>名次積分總和 <span class="text-xs opacity-70">（4-2-1-0 總分）</span></li>
+                    <li>第一名次數較多者</li>
+                    <li>五將總得失分 <span class="text-xs opacity-70">（總點數）</span></li>
+                    <li class="font-normal opacity-80">若仍平手，由裁判抽籤決定</li>
+                </ol>
+            </div>
+
+            <!-- 注意事項 -->
+            <div class="text-xs text-gray-500 space-y-1 text-center border-t pt-4">
+                <p>⛔ 喊胡不反悔｜詐胡依規範扣分｜旁觀不語</p>
+                <p class="font-bold text-red-600">比賽期間請依裁判廣播行動，並準時就座</p>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="mj-bg p-3 text-center text-white text-xs">
+            祝各位選手 旗開得勝
+        </div>
+    </div>
+
+    <!-- 下載按鈕與提示 -->
+    <div class="mt-8 flex flex-col items-center">
+        <button onclick="downloadPoster()" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-full shadow-lg flex items-center transition transform hover:scale-105">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+            </svg>
+            下載圖片
+        </button>
+        <p class="text-red-500 text-sm mt-3 font-bold bg-white px-2 py-1 rounded shadow">
+            ⚠️ 如下載失敗，請直接使用「手機截圖」功能保存
+        </p>
+    </div>
+
+    <script>
+        function downloadPoster() {
+            const captureElement = document.getElementById('capture-area');
+            const button = document.querySelector('button');
+            const originalText = button.innerHTML;
+            
+            button.innerHTML = '生成中...';
+            button.classList.add('opacity-50', 'cursor-not-allowed');
+
+            // 增加 timeout 以防卡住
+            setTimeout(() => {
+                html2canvas(captureElement, {
+                    scale: 2, 
+                    useCORS: true, // 重要：允許跨域資源
+                    allowTaint: true, // 允許被污染 (但可能會導致無法 toDataURL)
+                    backgroundColor: "#f3f4f6"
+                }).then(canvas => {
+                    try {
+                        const link = document.createElement('a');
+                        link.download = '2025麻將大賽公告.jpg';
+                        // 使用 jpeg 格式相容性較好
+                        link.href = canvas.toDataURL('image/jpeg', 0.9);
+                        document.body.appendChild(link);
+                        link.click();
+                        document.body.removeChild(link);
+                    } catch (e) {
+                        alert("下載被瀏覽器阻擋 (CORS限制)。\n\n請直接使用「螢幕截圖」功能即可！");
+                        console.error(e);
+                    }
+                    // 恢復按鈕
+                    button.innerHTML = originalText;
+                    button.classList.remove('opacity-50', 'cursor-not-allowed');
+                }).catch(err => {
+                    alert("圖片生成發生錯誤。\n\n建議您直接使用「手機截圖」保存畫面。");
+                    console.error(err);
+                    button.innerHTML = originalText;
+                    button.classList.remove('opacity-50', 'cursor-not-allowed');
+                });
+            }, 100);
+        }
+    </script>
+
+</body>
+</html>
